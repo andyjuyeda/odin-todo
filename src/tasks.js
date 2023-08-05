@@ -4,6 +4,7 @@ export const Task = (
   dueDate,
   priority,
   notes,
+  inProgress = false,
   completed = false
 ) => {
   return {
@@ -12,7 +13,11 @@ export const Task = (
     dueDate,
     priority,
     notes,
+    inProgress,
     completed,
+    toggleProgress() {
+        this.inProgress = !this.inProgress;
+      },
     toggleCompleted() {
       this.completed = !this.completed;
     },

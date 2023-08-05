@@ -4,7 +4,7 @@ import { format } from "date-fns";
 import * as content from "./domelements";
 import { Task, formData } from "./tasks";
 
-let tasksArray = [];
+export let tasksArray = [];
 
 MicroModal.init();
 
@@ -38,7 +38,9 @@ document.querySelector("form#new-task").addEventListener("submit", (e) => {
     data.taskNotes
   );
   tasksArray.push(newTask);
-  console.log(tasksArray);
+  e.target.reset();
+  MicroModal.close("modal-1");
+  updateContent(content.overviewContent);
 });
 
 updateContent(content.overviewContent);
