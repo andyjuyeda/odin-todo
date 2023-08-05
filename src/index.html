@@ -4,22 +4,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ToDo List</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <title>Tasks</title>
 </head>
 
 <body>
     <div class="container">
         <header>
-            <div id="nav">
-                <div class="logo"><span class="logo-to">to</span><span class="logo-do">DO</span></div>
+            <nav>
+                <div class="logo"><span class="logo-my">My</span><span class="logo-tasks">Tasks</span></div>
                 <ul>
                     <li class="nav-item"><button class="nav-btn overview">Overview</button></li>
                     <li class="nav-item"><button class="nav-btn in-progress">In Progress</button></li>
                     <li class="nav-item"><button class="nav-btn todo">To Do</button></li>
+                    <li class="nav-item"><button class="nav-btn done">Done</button></li>
                 </ul>
-            </div>
+                <div class="user">
+                    <button class="new-task" data-micromodal-trigger="modal-1">New Task</button>
+                    <span class="name">Sign In</span>
+                </div>
+            </nav>
         </header>
         <div id="content"></div>
+    </div>
+    <div id="modal-1" aria-hidden="true">
+
+        <div tabindex="-1" data-micromodal-close>
+
+            <div role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+
+                <header>
+                    <h2 id="modal-1-title">
+                        New Task
+                    </h2>
+                </header>
+
+                <div id="modal-1-content">
+                    <form action="#" id="new-task">
+                        <div>
+                            <label for="task-name">Name</label>
+                            <input type="text" id="task-name" required>
+                        </div>
+
+                        <div>
+                            <label for="description">Description</label>
+                            <input type="text" id="description">
+                        </div>
+
+                        <div id="date-priority">
+                            <div>
+                                <label for="due-date">Due Date</label>
+                                <input type="date" id="due-date">
+                            </div>
+                            <div>
+                                <label for="priority">Priority</label>
+                                <select name="priority" id="priority">
+                                    <option value="high">High</option>
+                                    <option value="normal" selected>Normal</option>
+                                    <option value="low">Low</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="notes">Additional Notes</label>
+                            <textarea name="notes" id="notes" cols="30" rows="10"></textarea>
+                        </div>
+
+                        <button type="submit">Create Task</button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
     </div>
 </body>
 

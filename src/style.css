@@ -1,5 +1,6 @@
 :root {
     --header-height: 75px;
+    --primary-color: rgb(59, 103, 234);
 }
 
 * {
@@ -8,30 +9,127 @@
     padding: 0;
 }
 
-header {
-    height: var(--header-height);
+body {
+    font-family: 'Poppins', sans-serif;
     display: grid;
 }
 
-#nav {
+.container {
+    justify-self: center;
+    width: min(1200px, 100vw);
+    display: grid;
+    grid-template-rows: var(--header-height) 1fr;
+}
+
+header {
+    width: 100%;
+    place-self: center;
+    display: grid;
+}
+
+nav {
     display: grid;
     grid-template-columns: 1fr 3fr 1fr;
     place-items: center;
 }
 
-#nav .logo {
+nav .logo {
     display: flex;
 }
 
-#nav > ul {
+nav .logo span {
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+nav>ul {
     display: flex;
     list-style: none;
     gap: 30px;
 }
 
-#nav button {
+nav button {
+    font-family: 'Poppins', sans-serif;
     background-color: transparent;
     border: none;
     cursor: pointer;
+}
+
+nav li button {
     font-size: 1.3rem;
+}
+
+nav .user {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.user span,
+.user button {
+    font-size: 14px;
+}
+
+
+#modal-1 {
+    display: none;
+    background-color: rgba(0, 0, 0, 0.3);
+    height: 100vh;
+    width: 100%;
+    z-index: 1;
+    position: fixed;
+    left: 0;
+    top: 0;
+}
+
+#modal-1.is-open {
+    display: block;
+}
+
+#modal-1.is-open>div {
+    display: grid;
+    grid-template-rows: 2fr 1fr;
+    height: 100%;
+}
+
+#modal-1>div>div {
+    place-self: center;
+    background-color: #fefefe;
+    width: min(400px, 90vw);
+    border-radius: 6px;
+    padding: 20px;
+}
+
+form#new-task {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+form#new-task div {
+    display: flex;
+    flex-direction: column;
+}
+
+form#new-task #date-priority {
+    display: flex;
+    gap: 20px;
+}
+
+.user button,
+form#new-task button {
+    background-color: var(--primary-color);
+    color: #FFF;
+    border: none;
+    border-radius: 99px;
+    width: 6rem;
+    height: 1.8rem;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+}
+
+.user button:hover,
+form#new-task button {
+    background-color: rgb(41, 90, 239);
+    box-shadow: none;
 }
