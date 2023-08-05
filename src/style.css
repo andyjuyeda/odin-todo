@@ -38,8 +38,18 @@ nav .logo {
 }
 
 nav .logo span {
-    font-size: 2rem;
-    font-weight: 600;
+    font-size: 2.1rem;
+    font-weight: 700;
+}
+
+
+.logo span.logo-my {
+    font-family: 'Norican', sans-serif;
+    text-transform: lowercase;
+}
+
+.logo span.logo-tasks {
+    color: var(--primary-color);
 }
 
 nav>ul {
@@ -114,6 +124,10 @@ form#new-task div {
 form#new-task #date-priority {
     display: flex;
     gap: 20px;
+}
+
+form#new-task button {
+    font-family: 'Poppins', sans-serif;
 }
 
 .user button,

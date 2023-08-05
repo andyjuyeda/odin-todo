@@ -6,6 +6,7 @@ module.exports = {
   entry: {
     index: "./src/index.js",
     elements: "./src/domelements.js",
+    tasks: "./src/tasks.js",
   },
   devtool: "inline-source-map",
   devServer: {
