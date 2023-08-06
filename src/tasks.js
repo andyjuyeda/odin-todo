@@ -3,24 +3,16 @@ export const Task = (
   description,
   dueDate,
   priority,
+  status,
   notes,
-  inProgress = false,
-  completed = false
 ) => {
   return {
     name,
     description,
     dueDate,
     priority,
+    status,
     notes,
-    inProgress,
-    completed,
-    toggleProgress() {
-        this.inProgress = !this.inProgress;
-      },
-    toggleCompleted() {
-      this.completed = !this.completed;
-    },
   };
 };
 
@@ -30,8 +22,9 @@ export const formData = {
     let taskDescription = document.getElementById("description").value;
     let taskDueDate = document.getElementById("due-date").value;
     let taskPriority = document.getElementById("priority").value;
+    let taskStatus = document.getElementById("status").value;
     let taskNotes = document.getElementById("notes").value;
-    return { taskName, taskDescription, taskDueDate, taskPriority, taskNotes };
+    return { taskName, taskDescription, taskDueDate, taskPriority, taskStatus, taskNotes };
   },
 };
 

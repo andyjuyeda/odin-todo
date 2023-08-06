@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -18,18 +19,18 @@
             <nav>
                 <div class="logo"><span class="logo-my">My</span><span class="logo-tasks">Tasks</span></div>
                 <ul>
-                    <li class="nav-item"><button class="nav-btn overview">Overview</button></li>
-                    <li class="nav-item"><button class="nav-btn in-progress">In Progress</button></li>
-                    <li class="nav-item"><button class="nav-btn todo">To Do</button></li>
-                    <li class="nav-item"><button class="nav-btn done">Done</button></li>
+                    <li class="nav-item"><button class="nav-btn nav-overview">Overview</button></li>
+                    <li class="nav-item"><button class="nav-btn nav-todo">ToDo</button></li>
+                    <li class="nav-item"><button class="nav-btn nav-doing">Doing</button></li>
+                    <li class="nav-item"><button class="nav-btn nav-done">Done</button></li>
                 </ul>
                 <div class="user">
                     <button class="new-task" data-micromodal-trigger="modal-1">New Task</button>
-                    <span class="name">Sign In</span>
                 </div>
             </nav>
         </header>
         <div id="content"></div>
+
     </div>
     <div id="modal-1" aria-hidden="true">
 
@@ -63,9 +64,17 @@
                             <div>
                                 <label for="priority">Priority</label>
                                 <select name="priority" id="priority">
-                                    <option value="high">High</option>
-                                    <option value="normal" selected>Normal</option>
-                                    <option value="low">Low</option>
+                                    <option value="High">High</option>
+                                    <option value="Normal" selected>Normal</option>
+                                    <option value="Low">Low</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="status">Status</label>
+                                <select name="status" id="status">
+                                    <option value="ToDo" selected>ToDo</option>
+                                    <option value="Doing">Doing</option>
+                                    <option value="Done">Done</option>
                                 </select>
                             </div>
                         </div>

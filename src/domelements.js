@@ -1,59 +1,60 @@
 import { tasksArray } from ".";
 
+function createCardSection(label, content) {
+  let sectionDiv = document.createElement("div");
+
+  let h5Element = document.createElement("h5");
+  h5Element.textContent = label;
+  sectionDiv.appendChild(h5Element);
+
+  let pElement = document.createElement("p");
+  pElement.textContent = content;
+  sectionDiv.appendChild(pElement);
+
+  return sectionDiv;
+}
+
 const createTaskCard = (task) => {
-  let cardClasses = ["card", `priority-${task.priority}`];
-  if (task.inProgress) {
-    cardClasses.push("in-progress");
-  }
-  if (task.completed) {
-    cardClasses.push("completed");
-  }
+  let cardClasses = ["card", `priority-${task.priority}`, task.status];
   let taskCard = document.createElement("div");
   taskCard.classList.add(...cardClasses);
 
   let cardTitle = document.createElement("div");
   cardTitle.classList.add("card-title");
-  let name = document.createElement("h4");
+  let name = document.createElement("h3");
   name.textContent = task.name;
   cardTitle.appendChild(name);
   taskCard.appendChild(cardTitle);
 
   let cardBody = document.createElement("div");
   cardBody.classList.add("card-body");
-  let description = document.createElement("p");
-  description.classList.add("task-description");
-  description.textContent = task.description;
+
+  let description = createCardSection("Description", task.description);
   cardBody.appendChild(description);
-  let dueDateDiv = document.createElement("div");
-  dueDateDiv.classList.add("task-due-date");
 
-  let h5DueDate = document.createElement("h5");
-  h5DueDate.textContent = "Due";
-  dueDateDiv.appendChild(h5DueDate);
+  let dueDate = createCardSection("Due", task.dueDate);
+  cardBody.appendChild(dueDate);
 
-  let pDueDate = document.createElement("p");
-  pDueDate.textContent = task.dueDate;
-  dueDateDiv.appendChild(pDueDate);
+  let priority = createCardSection("Priority", task.priority);
+  cardBody.appendChild(priority);
 
-  cardBody.appendChild(dueDateDiv);
+  let status = createCardSection("Status", task.status);
+  cardBody.appendChild(status);
 
-  let priorityDiv = document.createElement("div");
-  priorityDiv.classList.add("priority");
-
-  let h5Priority = document.createElement("h5");
-  h5Priority.textContent = "Priority";
-  priorityDiv.appendChild(h5Priority);
-
-  let pPriority = document.createElement("p");
-  pPriority.textContent = task.priority;
-  priorityDiv.appendChild(pPriority);
-
-  cardBody.appendChild(priorityDiv);
-
-  let notes = document.createElement("p");
-  notes.classList.add("task-notes");
-  notes.textContent = task.notes;
+  let notes = createCardSection("Notes", task.notes);
   cardBody.appendChild(notes);
+
+  let editIcon = document.createElement("div");
+  editIcon.classList.add("edit-icon");
+  let iconRegular = document.createElement("i");
+  iconRegular.classList.add("bi");
+  iconRegular.classList.add("bi-pencil");
+  editIcon.appendChild(iconRegular);
+  let iconFill = document.createElement("i");
+  iconFill.classList.add("bi");
+  iconFill.classList.add("bi-pencil-fill");
+  editIcon.appendChild(iconFill);
+  cardBody.appendChild(editIcon);
 
   taskCard.appendChild(cardBody);
 
@@ -62,8 +63,8 @@ const createTaskCard = (task) => {
 
 export const overviewContent = () => {
   let container = document.createElement("div");
-  container.classList.add("container");
-  container.classList.add("overview");
+  container.classList.add("section");
+  container.classList.add("section-overview");
 
   for (let task of tasksArray) {
     container.appendChild(createTaskCard(task));
@@ -74,8 +75,8 @@ export const overviewContent = () => {
 
 export const todoContent = () => {
   let container = document.createElement("div");
-  container.classList.add("container");
-  container.classList.add("todo");
+  container.classList.add("section");
+  container.classList.add("section-todo");
 
   container.textContent = "This is the todo page.";
 
@@ -84,10 +85,10 @@ export const todoContent = () => {
 
 export const inProgressContent = () => {
   let container = document.createElement("div");
-  container.classList.add("container");
-  container.classList.add("in-progress");
+  container.classList.add("section");
+  container.classList.add("section-doing");
 
-  container.textContent = "In Progress";
+  container.textContent = "Doing";
 
   return container;
 };

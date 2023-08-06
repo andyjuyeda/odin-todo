@@ -10,15 +10,19 @@
 }
 
 body {
+    background-color: #ffffff;
     font-family: 'Poppins', sans-serif;
+    height: 100dvh;
     display: grid;
 }
 
 .container {
     justify-self: center;
     width: min(1200px, 100vw);
+    height: 100%;
     display: grid;
     grid-template-rows: var(--header-height) 1fr;
+    gap: 50px;
 }
 
 header {
@@ -98,7 +102,6 @@ nav .user {
 
 #modal-1.is-open>div {
     display: grid;
-    grid-template-rows: 2fr 1fr;
     height: 100%;
 }
 
@@ -146,4 +149,61 @@ form#new-task button {
 form#new-task button {
     background-color: rgb(41, 90, 239);
     box-shadow: none;
+}
+
+.section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.card {
+    background-color: rgba(59, 103, 234, 0.1);
+    width: min(300px, 100%);
+    height: fit-content;
+    border: 3px solid var(--primary-color);
+    border-radius: 15px;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+}
+
+.card p {
+    font-size: 0.9rem;
+}
+
+.card-title {
+    background-color: #ffffff;
+    border-radius: 15px 15px 0 0;
+    border-bottom: 3px solid var(--primary-color);
+    padding: 5px 10px;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 10px 10px 50px 10px;
+}
+
+
+.card div h5 {
+    border-bottom: 1px solid var(--primary-color);
+}
+
+.card .edit-icon {
+    position: relative;
+    cursor: pointer;
+}
+.card .bi {
+    position: absolute;
+    bottom: -45px;
+    right: 0px;
+    transition: all 0.2s ease;
+}
+
+.card .bi-pencil-fill {
+    opacity: 0;
+}
+
+.card .edit-icon:hover .bi-pencil-fill {
+    opacity: 1;
 }

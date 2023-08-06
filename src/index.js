@@ -14,15 +14,15 @@ const updateContent = (contentFunc) => {
   container.appendChild(contentFunc());
 };
 
-let overviewButton = document.querySelector(".nav-btn.overview");
+let overviewButton = document.querySelector(".nav-btn.nav-overview");
 overviewButton.addEventListener("click", () =>
   updateContent(content.overviewContent)
 );
 
-let todoButton = document.querySelector(".nav-btn.todo");
+let todoButton = document.querySelector(".nav-btn.nav-todo");
 todoButton.addEventListener("click", () => updateContent(content.todoContent));
 
-let inProgressButton = document.querySelector(".nav-btn.in-progress");
+let inProgressButton = document.querySelector(".nav-btn.nav-doing");
 inProgressButton.addEventListener("click", () =>
   updateContent(content.inProgressContent)
 );
@@ -35,6 +35,7 @@ document.querySelector("form#new-task").addEventListener("submit", (e) => {
     data.taskDescription,
     data.taskDueDate,
     data.taskPriority,
+    data.taskStatus,
     data.taskNotes
   );
   tasksArray.push(newTask);
