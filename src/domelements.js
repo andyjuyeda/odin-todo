@@ -2,6 +2,8 @@ import { tasksArray } from ".";
 import { Task, formData } from "./tasks";
 import { updateContent } from ".";
 import MicroModal from "micromodal";
+import formatDistance from "date-fns/formatDistance";
+
 
 function createCardSection(label, content) {
   let sectionDiv = document.createElement("div");
@@ -15,6 +17,13 @@ function createCardSection(label, content) {
   sectionDiv.appendChild(pElement);
 
   return sectionDiv;
+}
+
+function formatDueDate(dueDateString) {
+  const dueDateObj = new Date(dueDateString);
+  const currentDate = new Date();
+  const distance = formatDistance(dueDateObj, currentDate);
+  return `${dueDateString} (${distance})`;
 }
 
 const createTaskCard = (task) => {
@@ -35,7 +44,7 @@ const createTaskCard = (task) => {
   let description = createCardSection("Description", task.description);
   cardBody.appendChild(description);
 
-  let dueDate = createCardSection("Due", task.dueDate);
+  let dueDate = createCardSection("Due", formatDueDate(task.dueDate));
   cardBody.appendChild(dueDate);
 
   let priority = createCardSection("Priority", task.priority);
