@@ -1,4 +1,7 @@
 import { tasksArray } from ".";
+import { Task, formData } from "./tasks";
+import { updateContent } from ".";
+import MicroModal from "micromodal";
 
 function createCardSection(label, content) {
   let sectionDiv = document.createElement("div");
@@ -54,6 +57,8 @@ const createTaskCard = (task) => {
   iconFill.classList.add("bi");
   iconFill.classList.add("bi-pencil-fill");
   editIcon.appendChild(iconFill);
+
+  editIcon.addEventListener("click", () => openModalForEditTask(task));
   cardBody.appendChild(editIcon);
 
   taskCard.appendChild(cardBody);
@@ -92,3 +97,78 @@ export const inProgressContent = () => {
 
   return container;
 };
+
+let currentFormSubmitHandler;
+
+export function openModalForNewTask() {
+  document.getElementById("modal-1-title").textContent = "New Task";
+  document.querySelector("#new-task button[type='submit']").textContent =
+    "Create Task";
+
+  let form = document.querySelector("form#new-task");
+  form.reset();
+
+  if (currentFormSubmitHandler) {
+    form.removeEventListener("submit", currentFormSubmitHandler);
+  }
+
+  currentFormSubmitHandler = (e) => {
+    e.preventDefault();
+    let data = formData.receiveData();
+    let newTask = Task(
+      data.taskName,
+      data.taskDescription,
+      data.taskDueDate,
+      data.taskPriority,
+      data.taskStatus,
+      data.taskNotes
+    );
+    tasksArray.push(newTask);
+    e.target.reset();
+    MicroModal.close("modal-1");
+    updateContent(overviewContent);
+  };
+
+  form.addEventListener("submit", currentFormSubmitHandler);
+}
+
+export function openModalForEditTask(task) {
+  const { name, description, dueDate, priority, status, notes } = task;
+
+  MicroModal.show("modal-1");
+
+  document.getElementById("modal-1-title").textContent = "Edit Task";
+  document.querySelector("#new-task button[type='submit']").textContent =
+    "Update Task";
+
+  let form = document.querySelector("form#new-task");
+  form.reset();
+
+  document.querySelector("input#task-name").value = name;
+  document.querySelector("input#description").value = description;
+  document.querySelector("input#due-date").value = dueDate;
+  document.querySelector("select#priority").value = priority;
+  document.querySelector("select#status").value = status;
+  document.querySelector("textarea#notes").value = notes; // use `.value` for textarea
+
+  if (currentFormSubmitHandler) {
+    form.removeEventListener("submit", currentFormSubmitHandler);
+  }
+
+  currentFormSubmitHandler = (e) => {
+    e.preventDefault();
+    let data = formData.receiveData();
+
+    task.name = data.taskName;
+    task.description = data.taskDescription;
+    task.dueDate = data.taskDueDate;
+    task.priority = data.taskPriority;
+    task.status = data.taskStatus;
+    task.notes = data.taskNotes;
+    e.target.reset();
+    MicroModal.close("modal-1");
+    updateContent(overviewContent);
+  };
+
+  form.addEventListener("submit", currentFormSubmitHandler);
+}

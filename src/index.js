@@ -2,14 +2,14 @@ import "./style.css";
 import MicroModal from "micromodal";
 import { format } from "date-fns";
 import * as content from "./domelements";
-import { Task, formData } from "./tasks";
+import { openModalForNewTask } from "./domelements";
 
 export let tasksArray = [];
 
 MicroModal.init();
 
 const container = document.querySelector("#content");
-const updateContent = (contentFunc) => {
+export const updateContent = (contentFunc) => {
   container.innerHTML = "";
   container.appendChild(contentFunc());
 };
@@ -27,23 +27,9 @@ inProgressButton.addEventListener("click", () =>
   updateContent(content.inProgressContent)
 );
 
-document.querySelector("form#new-task").addEventListener("submit", (e) => {
-  e.preventDefault();
-  let data = formData.receiveData();
-  let newTask = Task(
-    data.taskName,
-    data.taskDescription,
-    data.taskDueDate,
-    data.taskPriority,
-    data.taskStatus,
-    data.taskNotes
-  );
-  tasksArray.push(newTask);
-  e.target.reset();
-  MicroModal.close("modal-1");
-  updateContent(content.overviewContent);
-});
+
 
 updateContent(content.overviewContent);
 let today = format(new Date(), "yyyy-MM-dd");
 document.querySelector("#due-date").setAttribute("min", today);
+document.querySelector("button.new-task").addEventListener("click", () => openModalForNewTask());
