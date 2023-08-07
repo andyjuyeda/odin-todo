@@ -1,6 +1,9 @@
 :root {
     --header-height: 75px;
     --primary-color: rgb(59, 103, 234);
+    --high-priority: rgb(204, 23, 41);
+    --low-priority: rgb(16, 168, 95);
+    --done: rgb(93, 93, 93);
 }
 
 * {
@@ -141,7 +144,7 @@ form#new-task button {
     border-radius: 99px;
     width: 6rem;
     height: 1.8rem;
-    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3) ;
     cursor: pointer;
 }
 
@@ -151,8 +154,19 @@ form#new-task button {
     box-shadow: none;
 }
 
-#modal-1-content .buttons {
+#modal-1-content form .buttons {
     display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+button.delete {
+    display: none;
+    background-color: red !important;
+}
+
+button.delete.show {
+    display: block;
 }
 
 .section {

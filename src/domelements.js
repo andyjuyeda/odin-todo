@@ -135,6 +135,7 @@ export const doneContent = () => {
 let currentFormSubmitHandler;
 
 export function openModalForNewTask() {
+  document.querySelector("#modal-1-content .delete").classList.remove("show");
   document.getElementById("modal-1-title").textContent = "New Task";
   document.querySelector("#new-task button[type='submit']").textContent =
     "Create Task";
@@ -166,8 +167,13 @@ export function openModalForNewTask() {
   form.addEventListener("submit", currentFormSubmitHandler);
 }
 
+let currentDeleteHandler;
+
 export function openModalForEditTask(task) {
   const { name, description, dueDate, priority, status, notes } = task;
+
+  const deleteButton = document.querySelector("#modal-1-content .delete");
+  deleteButton.classList.add("show");
 
   MicroModal.show("modal-1");
 
@@ -206,19 +212,19 @@ export function openModalForEditTask(task) {
 
   form.addEventListener("submit", currentFormSubmitHandler);
 
-  let div = document.querySelector("#modal-1-content .buttons");
-  const deleteButton = document.createElement("button");
-  deleteButton.classList.add("delete");
-  deleteButton.textContent = "Delete Task";
-  deleteButton.setAttribute("type", "button");
-  div.appendChild(deleteButton);
 
-  deleteButton.addEventListener("click", () => {
+  if (currentDeleteHandler) {
+    deleteButton.removeEventListener("click", currentDeleteHandler);
+  }
+
+  currentDeleteHandler = () => {
     const taskIndex = tasksArray.findIndex((t) => t === task);
     if (taskIndex !== -1) {
       tasksArray.splice(taskIndex, 1);
     }
     MicroModal.close("modal-1");
     updateContent(overviewContent);
-  });
+  };
+
+  deleteButton.addEventListener("click", currentDeleteHandler);
 }
