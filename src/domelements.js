@@ -79,7 +79,8 @@ export const overviewContent = () => {
   container.classList.add("section");
   container.classList.add("section-overview");
 
-  for (let task of tasksArray) {
+  const unfinishedTasks = tasksArray.filter((task) => task.status !== "Done");
+  for (let task of unfinishedTasks) {
     container.appendChild(createTaskCard(task));
   }
 
@@ -159,6 +160,7 @@ export function openModalForNewTask() {
       data.taskNotes
     );
     tasksArray.push(newTask);
+    localStorage.setItem('tasks', JSON.stringify(tasksArray));
     e.target.reset();
     MicroModal.close("modal-1");
     updateContent(overviewContent);
@@ -205,13 +207,13 @@ export function openModalForEditTask(task) {
     task.priority = data.taskPriority;
     task.status = data.taskStatus;
     task.notes = data.taskNotes;
+    localStorage.setItem('tasks', JSON.stringify(tasksArray));
     e.target.reset();
     MicroModal.close("modal-1");
     updateContent(overviewContent);
   };
 
   form.addEventListener("submit", currentFormSubmitHandler);
-
 
   if (currentDeleteHandler) {
     deleteButton.removeEventListener("click", currentDeleteHandler);
@@ -222,6 +224,7 @@ export function openModalForEditTask(task) {
     if (taskIndex !== -1) {
       tasksArray.splice(taskIndex, 1);
     }
+    localStorage.setItem('tasks', JSON.stringify(tasksArray));
     MicroModal.close("modal-1");
     updateContent(overviewContent);
   };

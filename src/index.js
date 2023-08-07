@@ -5,6 +5,10 @@ import * as content from "./domelements";
 import { openModalForNewTask } from "./domelements";
 
 export let tasksArray = [];
+if (localStorage.getItem('tasks')) {
+  tasksArray = JSON.parse(localStorage.getItem('tasks'));
+}
+
 
 MicroModal.init();
 
