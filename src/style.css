@@ -151,6 +151,10 @@ form#new-task button {
     box-shadow: none;
 }
 
+#modal-1-content .buttons {
+    display: flex;
+}
+
 .section {
     display: flex;
     flex-wrap: wrap;
@@ -164,6 +168,7 @@ form#new-task button {
     border: 3px solid var(--primary-color);
     border-radius: 15px;
     box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+    transition: all 0.5s ease;
 }
 
 .card p {
@@ -180,7 +185,7 @@ form#new-task button {
 .card-body {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 10px;
     padding: 10px 10px 50px 10px;
 }
 
@@ -207,3 +212,4 @@ form#new-task button {
 .card .edit-icon:hover .bi-pencil-fill {
     opacity: 1;
 }
+

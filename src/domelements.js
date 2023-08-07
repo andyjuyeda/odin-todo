@@ -4,7 +4,6 @@ import { updateContent } from ".";
 import MicroModal from "micromodal";
 import formatDistance from "date-fns/formatDistance";
 
-
 function createCardSection(label, content) {
   let sectionDiv = document.createElement("div");
 
@@ -92,7 +91,13 @@ export const todoContent = () => {
   container.classList.add("section");
   container.classList.add("section-todo");
 
-  container.textContent = "This is the todo page.";
+  const toDoTasksSorted = tasksArray
+    .filter((task) => task.status === "ToDo")
+    .sort((a, b) => a.dueDate.localeCompare(b.dueDate));
+
+  for (let task of toDoTasksSorted) {
+    container.appendChild(createTaskCard(task));
+  }
 
   return container;
 };
@@ -102,7 +107,27 @@ export const inProgressContent = () => {
   container.classList.add("section");
   container.classList.add("section-doing");
 
-  container.textContent = "Doing";
+  const doingTasksSorted = tasksArray
+    .filter((task) => task.status === "Doing")
+    .sort((a, b) => a.dueDate.localeCompare(b.dueDate));
+
+  for (let task of doingTasksSorted) {
+    container.appendChild(createTaskCard(task));
+  }
+
+  return container;
+};
+
+export const doneContent = () => {
+  let container = document.createElement("div");
+  container.classList.add("section");
+  container.classList.add("section-done");
+
+  const doneTasks = tasksArray.filter((task) => task.status === "Done");
+
+  for (let task of doneTasks) {
+    container.appendChild(createTaskCard(task));
+  }
 
   return container;
 };
@@ -180,4 +205,20 @@ export function openModalForEditTask(task) {
   };
 
   form.addEventListener("submit", currentFormSubmitHandler);
+
+  let div = document.querySelector("#modal-1-content .buttons");
+  const deleteButton = document.createElement("button");
+  deleteButton.classList.add("delete");
+  deleteButton.textContent = "Delete Task";
+  deleteButton.setAttribute("type", "button");
+  div.appendChild(deleteButton);
+
+  deleteButton.addEventListener("click", () => {
+    const taskIndex = tasksArray.findIndex((t) => t === task);
+    if (taskIndex !== -1) {
+      tasksArray.splice(taskIndex, 1);
+    }
+    MicroModal.close("modal-1");
+    updateContent(overviewContent);
+  });
 }

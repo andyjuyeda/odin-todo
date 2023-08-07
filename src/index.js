@@ -27,6 +27,11 @@ inProgressButton.addEventListener("click", () =>
   updateContent(content.inProgressContent)
 );
 
+let doneButton = document.querySelector(".nav-btn.nav-done");
+doneButton.addEventListener("click", () => {
+  updateContent(content.doneContent)
+})
+
 
 
 updateContent(content.overviewContent);
